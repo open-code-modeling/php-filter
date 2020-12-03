@@ -38,6 +38,15 @@ final class FilterFactoryTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_filters_method_name_with_only_upper_letters(): void
+    {
+        $filter = FilterFactory::methodNameFilter();
+        $this->assertSame('ny', ($filter)('NY'));
+    }
+
+    /**
+     * @test
      * @dataProvider providerForLabel
      * @param string $label
      */

@@ -16,6 +16,7 @@ use Laminas\Filter\Word\SeparatorToSeparator;
 use OpenCodeModeling\Filter\Filter\LowerCaseFirst;
 use OpenCodeModeling\Filter\Filter\NormalizeLabel;
 use OpenCodeModeling\Filter\Filter\UpperCaseFirst;
+use OpenCodeModeling\Filter\Filter\UpperToLower;
 
 final class FilterFactory
 {
@@ -93,7 +94,7 @@ final class FilterFactory
      */
     public static function methodNameFilter(): callable
     {
-        return new LowerCaseFirst(self::normalizeFilter());
+        return new LowerCaseFirst(self::normalizeFilter(new UpperToLower()));
     }
 
     /**
