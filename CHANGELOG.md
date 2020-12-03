@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.1.1 - TBD
+## 0.1.1 - 2020-12-03
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [0.1.1](https://github.com/open-code-modeling/php-filter/milestone/2)
 
-- Nothing.
+0.1.x bugfix release (patch)
 
-### Deprecated
+### 0.1.1
 
-- Nothing.
+- Total issues resolved: **1**
+- Total pull requests resolved: **0**
+- Total contributors: **1**
 
-### Removed
+#### bug
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [10: Method name filter and upper letters issue](https://github.com/open-code-modeling/php-filter/issues/10) thanks to @sandrokeil
 
 ## 0.1.0 - 2020-11-30
 
