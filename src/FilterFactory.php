@@ -49,6 +49,11 @@ final class FilterFactory
         );
     }
 
+    public static function camelCaseFilter(): callable
+    {
+        return new LowerCaseFirst(self::normalizeFilter());
+    }
+
     /**
      * Returns a filter for valid class names e.g. AddBuilding
      *
