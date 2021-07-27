@@ -30,6 +30,17 @@ final class FilterFactoryTest extends TestCase
      * @dataProvider providerForLabel
      * @param string $label
      */
+    public function it_filters_snake_case(string $label): void
+    {
+        $filter = FilterFactory::snakeCaseFilter();
+        $this->assertSame('add_building', ($filter)($label));
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForLabel
+     * @param string $label
+     */
     public function it_filters_method_name(string $label): void
     {
         $filter = FilterFactory::methodNameFilter();

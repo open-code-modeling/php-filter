@@ -41,6 +41,14 @@ final class FilterFactory
         return $filter;
     }
 
+    public static function snakeCaseFilter(): callable
+    {
+        return self::normalizeFilter(
+            new Filter\Word\CamelCaseToUnderscore(),
+            new Filter\StringToLower()
+        );
+    }
+
     /**
      * Returns a filter for valid class names e.g. AddBuilding
      *
