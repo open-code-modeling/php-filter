@@ -2,27 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.2.0 - TBD
+## 0.2.0 - 2021-07-27
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [0.2.0](https://github.com/open-code-modeling/php-filter/milestone/3)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 0.2.0
 
-- Nothing.
+- Total issues resolved: **4**
+- Total pull requests resolved: **0**
+- Total contributors: **1**
 
-### Removed
+#### enhancement
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [17: Switch from PHPStan to Psalm](https://github.com/open-code-modeling/php-filter/issues/17) thanks to @sandrokeil
+ - [16: Add PascalCase filter](https://github.com/open-code-modeling/php-filter/issues/16) thanks to @sandrokeil
+ - [15: Add camelCase filter](https://github.com/open-code-modeling/php-filter/issues/15) thanks to @sandrokeil
+ - [14: Add snake&#95;case filter](https://github.com/open-code-modeling/php-filter/issues/14) thanks to @sandrokeil
 
 ## 0.1.2 - 2021-02-10
 
