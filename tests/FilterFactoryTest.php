@@ -29,7 +29,18 @@ final class FilterFactoryTest extends TestCase
         yield 'AddBuilding' => ['AddBuilding'];
         yield ' Add Building ' => [' Add Building '];
         yield 'Add building ' => ['Add building '];
+        yield 'Add BUILDING ' => ['Add BUILDING '];
+        yield 'ADD BUILDING ' => ['ADD BUILDING '];
         yield 'html' => ['Add Building<hr id="null"><div style="text-align: left;">- buildingId: string</div><div style="text-align: left;">- name: string</div>'];
+    }
+
+    /**
+     * @return Generator<string, array>
+     */
+    public function providerForUpperOnlyLabel(): Generator
+    {
+        yield 'ADDBUILDING' => ['ADDBUILDING'];
+        yield 'html' => ['ADDBUILDING<hr id="null"><div style="text-align: left;">- buildingId: string</div><div style="text-align: left;">- name: string</div>'];
     }
 
     /**
@@ -45,6 +56,17 @@ final class FilterFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_snake_case_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::snakeCaseFilter();
+        $this->assertSame('addbuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
      * @dataProvider providerForLabel
      * @param string $label
      */
@@ -52,6 +74,17 @@ final class FilterFactoryTest extends TestCase
     {
         $filter = FilterFactory::camelCaseFilter();
         $this->assertSame('addBuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_camel_case_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::camelCaseFilter();
+        $this->assertSame('addbuilding', ($filter)($label));
     }
 
     /**
@@ -67,6 +100,17 @@ final class FilterFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_pascal_case_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::pascalCaseFilter();
+        $this->assertSame('Addbuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
      * @dataProvider providerForLabel
      * @param string $label
      */
@@ -78,11 +122,12 @@ final class FilterFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider providerForUpperOnlyLabel
      */
-    public function it_filters_method_name_with_only_upper_letters(): void
+    public function it_filters_method_name_with_only_upper_letters(string $label): void
     {
         $filter = FilterFactory::methodNameFilter();
-        $this->assertSame('ny', ($filter)('NY'));
+        $this->assertSame('addbuilding', ($filter)($label));
     }
 
     /**
@@ -98,6 +143,17 @@ final class FilterFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_property_name_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::propertyNameFilter();
+        $this->assertSame('addbuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
      * @dataProvider providerForLabel
      * @param string $label
      */
@@ -105,6 +161,17 @@ final class FilterFactoryTest extends TestCase
     {
         $filter = FilterFactory::constantNameFilter();
         $this->assertSame('ADD_BUILDING', ($filter)($label));
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_constant_name_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::constantNameFilter();
+        $this->assertSame('ADDBUILDING', ($filter)($label));
     }
 
     /**
@@ -120,6 +187,17 @@ final class FilterFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_constant_value_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::constantValueFilter();
+        $this->assertSame('addbuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
      * @dataProvider providerForLabel
      * @param string $label
      */
@@ -127,6 +205,17 @@ final class FilterFactoryTest extends TestCase
     {
         $filter = FilterFactory::classNameFilter();
         $this->assertSame('AddBuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForUpperOnlyLabel
+     * @param string $label
+     */
+    public function it_filters_class_name_with_only_upper_letters(string $label): void
+    {
+        $filter = FilterFactory::classNameFilter();
+        $this->assertSame('Addbuilding', ($filter)($label));
     }
 
     /**

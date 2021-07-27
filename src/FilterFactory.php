@@ -16,14 +16,13 @@ use Laminas\Filter\Word\SeparatorToSeparator;
 use OpenCodeModeling\Filter\Filter\LowerCaseFirst;
 use OpenCodeModeling\Filter\Filter\NormalizeLabel;
 use OpenCodeModeling\Filter\Filter\UpperCaseFirst;
-use OpenCodeModeling\Filter\Filter\UpperToLower;
 
 final class FilterFactory
 {
     /**
      * Returns a normalize filter for labels, names ...
      *
-     * @param  callable ...$callables Attached to the end of the filter chain
+     * @param callable ...$callables Attached to the end of the filter chain
      * @return callable
      */
     public static function normalizeFilter(callable ...$callables): callable
@@ -38,30 +37,45 @@ final class FilterFactory
         return $filter;
     }
 
+    /**
+     * Returns a filter for snake case values e.g. add_building
+     *
+     * @return callable
+     */
     public static function snakeCaseFilter(): callable
     {
         return self::normalizeFilter(
             new Filter\Word\CamelCaseToUnderscore(),
-            new Filter\StringToLower()
+            new Filter\StringToLower(),
+            new Filter\Word\SeparatorToSeparator(' ', '_'),
+            new Filter\Word\SeparatorToSeparator('-', '_'),
         );
     }
 
-    public static function camelCaseFilter(): callable
-    {
-        return new LowerCaseFirst(self::normalizeFilter());
-    }
-
-    public static function pascalCaseFilter(): callable
-    {
-        return new UpperCaseFirst(self::normalizeFilter());
-    }
-
     /**
-     * Returns a filter for valid class names e.g. AddBuilding
+     * Returns a filter for camel case values e.g. addBuilding
      *
      * @return callable
      */
-    public static function classNameFilter(): callable
+    public static function camelCaseFilter(): callable
+    {
+        return new LowerCaseFirst(
+            self::normalizeFilter(
+                new Filter\Word\CamelCaseToUnderscore(),
+                new Filter\StringToLower(),
+                new Filter\Word\UnderscoreToCamelCase(),
+                new Filter\Word\SeparatorToSeparator(' ', '-'),
+                new Filter\Word\DashToCamelCase()
+            )
+        );
+    }
+
+    /**
+     * Returns a filter for pascal case values e.g. AddBuilding
+     *
+     * @return callable
+     */
+    public static function pascalCaseFilter(): callable
     {
         return new UpperCaseFirst(
             self::normalizeFilter(
@@ -75,6 +89,16 @@ final class FilterFactory
     }
 
     /**
+     * Returns a filter for valid class names e.g. AddBuilding
+     *
+     * @return callable
+     */
+    public static function classNameFilter(): callable
+    {
+        return self::pascalCaseFilter();
+    }
+
+    /**
      * Returns a filter for valid constant names e.g. ADD_BUILDING
      *
      * @return callable
@@ -82,9 +106,9 @@ final class FilterFactory
     public static function constantNameFilter(): callable
     {
         return self::normalizeFilter(
-            new Filter\Word\SeparatorToSeparator(' ', '-'),
-            new Filter\Word\DashToCamelCase(),
             new Filter\Word\CamelCaseToUnderscore(),
+            new Filter\Word\SeparatorToSeparator(' ', '_'),
+            new Filter\Word\SeparatorToSeparator('-', '_'),
             new Filter\StringToUpper()
         );
     }
@@ -96,12 +120,7 @@ final class FilterFactory
      */
     public static function constantValueFilter(): callable
     {
-        return self::normalizeFilter(
-            new Filter\Word\SeparatorToSeparator(' ', '-'),
-            new Filter\Word\DashToCamelCase(),
-            new Filter\Word\CamelCaseToUnderscore(),
-            new Filter\StringToLower()
-        );
+        return self::snakeCaseFilter();
     }
 
     /**
@@ -111,15 +130,7 @@ final class FilterFactory
      */
     public static function propertyNameFilter(): callable
     {
-        return new LowerCaseFirst(
-            self::normalizeFilter(
-                new Filter\Word\CamelCaseToUnderscore(),
-                new Filter\StringToLower(),
-                new Filter\Word\UnderscoreToCamelCase(),
-                new Filter\Word\SeparatorToSeparator(' ', '-'),
-                new Filter\Word\DashToCamelCase()
-            )
-        );
+        return self::camelCaseFilter();
     }
 
     /**
@@ -129,16 +140,7 @@ final class FilterFactory
      */
     public static function methodNameFilter(): callable
     {
-        return new LowerCaseFirst(
-            self::normalizeFilter(
-                new Filter\Word\CamelCaseToUnderscore(),
-                new Filter\StringToLower(),
-                new Filter\Word\UnderscoreToCamelCase(),
-                new Filter\Word\SeparatorToSeparator(' ', '-'),
-                new Filter\Word\DashToCamelCase(),
-                new UpperToLower()
-            )
-        );
+        return self::camelCaseFilter();
     }
 
     /**
