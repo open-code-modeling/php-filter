@@ -54,6 +54,11 @@ final class FilterFactory
         return new LowerCaseFirst(self::normalizeFilter());
     }
 
+    public static function pascalCaseFilter(): callable
+    {
+        return new UpperCaseFirst(self::normalizeFilter());
+    }
+
     /**
      * Returns a filter for valid class names e.g. AddBuilding
      *

@@ -52,6 +52,17 @@ final class FilterFactoryTest extends TestCase
      * @dataProvider providerForLabel
      * @param string $label
      */
+    public function it_filters_pascal_case(string $label): void
+    {
+        $filter = FilterFactory::pascalCaseFilter();
+        $this->assertSame('AddBuilding', ($filter)($label));
+    }
+
+    /**
+     * @test
+     * @dataProvider providerForLabel
+     * @param string $label
+     */
     public function it_filters_method_name(string $label): void
     {
         $filter = FilterFactory::methodNameFilter();
