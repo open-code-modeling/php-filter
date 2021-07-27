@@ -21,6 +21,7 @@ final class FilterFactoryTest extends TestCase
      */
     public function providerForLabel(): Generator
     {
+        yield 'ADD_BUILDING' => ['ADD_BUILDING'];
         yield 'add building' => ['add building'];
         yield 'add_building' => ['add_building'];
         yield 'add-building' => ['add-building'];

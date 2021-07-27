@@ -24,6 +24,25 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+## 0.1.2 - 2021-02-10
+
+
+-----
+
+### Release Notes for [0.1.2](https://github.com/open-code-modeling/php-filter/milestone/5)
+
+0.1.x bugfix release (patch)
+
+### 0.1.2
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **0**
+- Total contributors: **1**
+
+#### bug
+
+- [12: Improve default filters to match more cases](https://github.com/open-code-modeling/php-filter/issues/12) thanks to @sandrokeil
+
 ## 0.1.1 - 2020-12-03
 
 

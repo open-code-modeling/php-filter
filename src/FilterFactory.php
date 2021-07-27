@@ -23,16 +23,13 @@ final class FilterFactory
     /**
      * Returns a normalize filter for labels, names ...
      *
-     * @param callable ...$callables Attached to the end of the filter chain
+     * @param  callable ...$callables Attached to the end of the filter chain
      * @return callable
      */
     public static function normalizeFilter(callable ...$callables): callable
     {
         $filter = new Filter\FilterChain();
         $filter->attach(new NormalizeLabel());
-        $filter->attach(new Filter\Word\SeparatorToSeparator(' ', '-'));
-        $filter->attach(new Filter\Word\UnderscoreToCamelCase());
-        $filter->attach(new Filter\Word\DashToCamelCase());
 
         foreach ($callables as $callable) {
             $filter->attach($callable);
@@ -66,7 +63,15 @@ final class FilterFactory
      */
     public static function classNameFilter(): callable
     {
-        return new UpperCaseFirst(self::normalizeFilter());
+        return new UpperCaseFirst(
+            self::normalizeFilter(
+                new Filter\Word\CamelCaseToUnderscore(),
+                new Filter\StringToLower(),
+                new Filter\Word\UnderscoreToCamelCase(),
+                new Filter\Word\SeparatorToSeparator(' ', '-'),
+                new Filter\Word\DashToCamelCase()
+            )
+        );
     }
 
     /**
@@ -77,6 +82,8 @@ final class FilterFactory
     public static function constantNameFilter(): callable
     {
         return self::normalizeFilter(
+            new Filter\Word\SeparatorToSeparator(' ', '-'),
+            new Filter\Word\DashToCamelCase(),
             new Filter\Word\CamelCaseToUnderscore(),
             new Filter\StringToUpper()
         );
@@ -90,6 +97,8 @@ final class FilterFactory
     public static function constantValueFilter(): callable
     {
         return self::normalizeFilter(
+            new Filter\Word\SeparatorToSeparator(' ', '-'),
+            new Filter\Word\DashToCamelCase(),
             new Filter\Word\CamelCaseToUnderscore(),
             new Filter\StringToLower()
         );
@@ -102,7 +111,15 @@ final class FilterFactory
      */
     public static function propertyNameFilter(): callable
     {
-        return new LowerCaseFirst(self::normalizeFilter());
+        return new LowerCaseFirst(
+            self::normalizeFilter(
+                new Filter\Word\CamelCaseToUnderscore(),
+                new Filter\StringToLower(),
+                new Filter\Word\UnderscoreToCamelCase(),
+                new Filter\Word\SeparatorToSeparator(' ', '-'),
+                new Filter\Word\DashToCamelCase()
+            )
+        );
     }
 
     /**
@@ -112,7 +129,16 @@ final class FilterFactory
      */
     public static function methodNameFilter(): callable
     {
-        return new LowerCaseFirst(self::normalizeFilter(new UpperToLower()));
+        return new LowerCaseFirst(
+            self::normalizeFilter(
+                new Filter\Word\CamelCaseToUnderscore(),
+                new Filter\StringToLower(),
+                new Filter\Word\UnderscoreToCamelCase(),
+                new Filter\Word\SeparatorToSeparator(' ', '-'),
+                new Filter\Word\DashToCamelCase(),
+                new UpperToLower()
+            )
+        );
     }
 
     /**
