@@ -38,12 +38,11 @@
         "jangregor/phpstan-prophecy": "^0.8.0",
         "laminas/laminas-filter": "^2.9",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/phpstan": "^0.12.33",
-        "phpstan/phpstan-strict-rules": "^0.12.4",
-        "phpunit/phpunit": "^9.2.6",
-        "prooph/php-cs-fixer-config": "^0.3",
+        "phpunit/phpunit": "^9.5.0",
+        "prooph/php-cs-fixer-config": "^v0.4.0",
+        "psalm/plugin-phpunit": "^0.15.0",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.4"
+        "vimeo/psalm": "^4.4"
     },
     "suggest": {
         "laminas/laminas-filter": "If you want to use the FilterFactory"
@@ -54,12 +53,13 @@
         "check": [
             "@cs",
             "@test",
-            "@analyse"
+            "@static-analysis"
         ],
-        "cs": "php-cs-fixer fix src -v --diff --dry-run",
-        "cs-fix": "php-cs-fixer fix src -v --diff",
-        "test": "vendor/bin/phpunit",
-        "analyse": "php vendor/bin/phpstan.phar analyse --no-interaction"
+        "cs": "php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix -v --diff",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "static-analysis": "psalm --shepherd --stats"
     },
     "config": {
         "sort-packages": true,
