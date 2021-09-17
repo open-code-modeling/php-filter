@@ -49,6 +49,7 @@ final class FilterFactory
             new Filter\StringToLower(),
             new Filter\Word\SeparatorToSeparator(' ', '_'),
             new Filter\Word\SeparatorToSeparator('-', '_'),
+            new Filter\Word\SeparatorToSeparator('/', '_'),
         );
     }
 
@@ -65,6 +66,7 @@ final class FilterFactory
                 new Filter\StringToLower(),
                 new Filter\Word\UnderscoreToCamelCase(),
                 new Filter\Word\SeparatorToSeparator(' ', '-'),
+                new Filter\Word\SeparatorToSeparator('/', '-'),
                 new Filter\Word\DashToCamelCase()
             )
         );
@@ -83,6 +85,7 @@ final class FilterFactory
                 new Filter\StringToLower(),
                 new Filter\Word\UnderscoreToCamelCase(),
                 new Filter\Word\SeparatorToSeparator(' ', '-'),
+                new Filter\Word\SeparatorToSeparator('/', '-'),
                 new Filter\Word\DashToCamelCase()
             )
         );
@@ -109,6 +112,7 @@ final class FilterFactory
             new Filter\Word\CamelCaseToUnderscore(),
             new Filter\Word\SeparatorToSeparator(' ', '_'),
             new Filter\Word\SeparatorToSeparator('-', '_'),
+            new Filter\Word\SeparatorToSeparator('/', '_'),
             new Filter\StringToUpper()
         );
     }

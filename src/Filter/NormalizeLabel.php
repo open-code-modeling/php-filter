@@ -29,6 +29,6 @@ final class NormalizeLabel extends AbstractFilter
         // Strip multi-spaces and tabs with a single space
         $normalizedName = \preg_replace(['/\s{2,}/', '/[\t\n]/'], ' ', $normalizedName);
 
-        return \trim($normalizedName);
+        return \trim(\trim($normalizedName), '/');
     }
 }

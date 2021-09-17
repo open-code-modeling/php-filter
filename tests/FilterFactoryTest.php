@@ -27,6 +27,8 @@ final class FilterFactoryTest extends TestCase
         yield 'add-building' => ['add-building'];
         yield 'addBuilding' => ['addBuilding'];
         yield 'AddBuilding' => ['AddBuilding'];
+        yield 'Add/Building' => ['Add/Building'];
+        yield '/Add/Building/' => ['/Add/Building/'];
         yield ' Add Building ' => [' Add Building '];
         yield 'Add building ' => ['Add building '];
         yield 'Add BUILDING ' => ['Add BUILDING '];
