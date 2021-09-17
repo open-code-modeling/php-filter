@@ -24,6 +24,25 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+## 0.2.1 - 2021-09-17
+
+
+-----
+
+### Release Notes for [0.2.1](https://github.com/open-code-modeling/php-filter/milestone/7)
+
+0.2.x bugfix release (patch)
+
+### 0.2.1
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **0**
+- Total contributors: **1**
+
+#### bug
+
+- [18: Support separator slash](https://github.com/open-code-modeling/php-filter/issues/18) thanks to @sandrokeil
+
 ## 0.2.0 - 2021-07-27
 
 
